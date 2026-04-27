@@ -1,7 +1,22 @@
-import { suma } from "./Suma.js";
-import { resta } from "./Resta.js";
-import { multiplicar } from "./Multiplicar.js";
-import { Division } from "./Dividir.js";
+ function suma(a, b) {
+    return a + b;
+}
+
+function resta(a, b) {
+    return a - b;
+}
+
+function multiplicar(a, b) {
+    return a * b;
+}
+
+function Division(a, b) {
+    if(b === 0) {
+        throw new Error("No se puede dividir por cero");
+    }
+    return a / b;
+}
+
 
 const display = document.getElementById("display");
 const keys = document.querySelector(".calculator-keys");
