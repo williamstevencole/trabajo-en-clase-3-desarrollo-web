@@ -1,22 +1,21 @@
- function suma(a, b) {
-    return a + b;
+function suma(a, b) {
+  return a + b;
 }
 
 function resta(a, b) {
-    return a - b;
+  return a - b;
 }
 
 function multiplicar(a, b) {
-    return a * b;
+  return a * b;
 }
 
 function Division(a, b) {
-    if(b === 0) {
-        throw new Error("No se puede dividir por cero");
-    }
-    return a / b;
+  if (b === 0) {
+    throw new Error("No se puede dividir por cero");
+  }
+  return a / b;
 }
-
 
 const display = document.getElementById("display");
 const keys = document.querySelector(".calculator-keys");
@@ -28,21 +27,37 @@ function tokenize(expression) {
   for (let i = 0; i < expression.length; i++) {
     const char = expression[i];
 
-    if (char === "-" && (i === 0 || "+-*/".includes(expression[i - 1]))) {
+    if (char === "-" && (i === 0 || "+-*/(".includes(expression[i - 1]))) {
       current += char;
-    } else if ("+-*/".includes(char)) {
-      tokens.push(parseFloat(current));
-      tokens.push(char);
+    } else if ("+-*/()".includes(char)) {
+      if (current) tokens.push(parseFloat(current));
+      if (char !== " ") tokens.push(char);
       current = "";
     } else {
       current += char;
     }
   }
-  tokens.push(parseFloat(current));
+  if (current) tokens.push(parseFloat(current));
   return tokens;
 }
 
 function evaluate(tokens) {
+  while (tokens.includes("(")) {
+    let start = tokens.lastIndexOf("(");
+    let end = tokens.indexOf(")", start);
+    if (end === -1) return "Error";
+
+    const subTokens = tokens.slice(start + 1, end);
+    const subResult = evaluateExpression(subTokens);
+    if (subResult === "Error") return "Error";
+
+    tokens.splice(start, end - start + 1, subResult);
+  }
+
+  return evaluateExpression(tokens);
+}
+
+function evaluateExpression(tokens) {
   let i = 1;
   while (i < tokens.length) {
     if (tokens[i] === "*" || tokens[i] === "/") {
@@ -89,9 +104,25 @@ keys.addEventListener("click", function (e) {
 
   if (target.classList.contains("operator")) {
     const last = display.value.slice(-1);
-    if (target.value === "-" && (display.value === "" || "*/".includes(last))) {
+    if (target.value === "(") {
+      if (display.value === "" || "+-*/(".includes(last)) {
+        display.value += "(";
+      }
+    } else if (target.value === ")") {
+      const openCount = (display.value.match(/\(/g) || []).length;
+      const closeCount = (display.value.match(/\)/g) || []).length;
+      if (
+        openCount > closeCount &&
+        (last === ")" || last === "." || /\d/.test(last))
+      ) {
+        display.value += ")";
+      }
+    } else if (
+      target.value === "-" &&
+      (display.value === "" || "*/(".includes(last))
+    ) {
       display.value += target.value;
-    } else if (display.value === "" || "+-*/".includes(last)) {
+    } else if (display.value === "" || "+-*/(".includes(last)) {
       return;
     } else {
       display.value += target.value;
