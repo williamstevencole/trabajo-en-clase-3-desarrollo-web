@@ -1,9 +1,10 @@
 .calculator {
-  width: 35vw;
-  height: 67vh;
+  width: 75vw;
+  height: 77vh;
   background-color: #111;
   margin: 0 auto;
   border-radius: 5px;
+    
 }
 
 .title {
@@ -37,6 +38,9 @@
   font-weight: bold;
   color: #fff;
   background-color: #333;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
 }
 
 .calculator-screen {
@@ -47,4 +51,22 @@
   font-family: 'Lucida Console', monospace;
   font-size: 1.5rem;
   letter-spacing: 2px;
+}
+
+.calculator .operator:hover,
+.calculator .number:hover,
+.calculator .decimal:hover,
+.calculator .clear:hover,
+.calculator .backspace:hover,
+.calculator .equal-sign:hover {
+  background-color: #555;
+} 
+
+.calculator .operator:active,
+.calculator .number:active,
+.calculator .decimal:active,
+.calculator .clear:active,
+.calculator .backspace:active,
+.calculator .equal-sign:active {
+  background-color: #919191;
 }
