@@ -12,25 +12,30 @@
     </header>
     <div class="calculator">
       <input type="text" class="calculator-screen" id="display" />
-      <div class="calculator-keys" style="grid-template-columns: repeat(5, 1fr)">
+      <div
+        class="calculator-keys"
+        style="grid-template-columns: repeat(5, 1fr)"
+      >
         <button class="number" value="7">7</button>
         <button class="number" value="8">8</button>
         <button class="number" value="9">9</button>
-        <button class="backspace" value="backspace" style="grid-column: span 2">&#9003;</button>
+        <button class="clear" value="C">C</button>
+        <button class="backspace" value="backspace">&#9003;</button>
         <button class="number" value="4">4</button>
         <button class="number" value="5">5</button>
         <button class="number" value="6">6</button>
-        <button class="operator" value="*">&times;</button>
         <button class="operator" value="/">&divide;</button>
+        <button class="operator" value="-">&minus;</button>
         <button class="number" value="1">1</button>
         <button class="number" value="2">2</button>
         <button class="number" value="3">3</button>
-        <button class="operator" value="-">&minus;</button>
-        <button class="equal-sign" value="=" style="grid-row: span 2; height: 100%">=</button>
-        <button class="clear" value="C">C</button>
+        <button class="operator" value="*">&times;</button>
+        <button class="operator" value="+">+</button>
+        <button class="equal-sign" value="=">=</button>
         <button class="number" value="0">0</button>
         <button class="decimal" value=".">.</button>
-        <button class="operator" value="+">+</button>
+        <button class="operator" value="(">&lpar;</button>
+        <button class="operator" value=")">&rpar;</button>
       </div>
     </div>
     <script src="script.js"></script>
