@@ -1,10 +1,9 @@
 .calculator {
-  width: 75vw;
-  height: 77vh;
+  width: min(75vw, 420px);
+  min-height: 77vh;
   background-color: #111;
   margin: 0 auto;
   border-radius: 5px;
-    
 }
 
 .title {
@@ -17,11 +16,22 @@
 
 .calculator-keys {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-gap: 10px;
   padding: 10px;
   justify-content: center;
   align-items: center;
+}
+
+.calculator-screen {
+  width: 100%;
+  height: 100px;
+  background-color: #222;
+  color: #fff;
+  font-size: 1.4rem;
+  text-align: right;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .calculator .operator,
@@ -30,27 +40,60 @@
 .calculator .clear,
 .calculator .backspace,
 .calculator .equal-sign {
-  padding: 35px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   background-color: #333;
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  color: #fff;
 }
 
-.calculator-screen {
-  width: 94%;
-  height: 50px;
-  border-radius: 5px;
-  margin: 10px;
-  font-family: 'Lucida Console', monospace;
-  font-size: 1.5rem;
-  letter-spacing: 2px;
+@media (max-width: 600px) {
+  .calculator {
+    width: 92vw;
+    min-height: 80vh;
+  }
+
+  .calculator .operator,
+  .calculator .number,
+  .calculator .decimal,
+  .calculator .clear,
+  .calculator .backspace,
+  .calculator .equal-sign {
+    font-size: 0.9rem;
+  }
+
+  .calculator-screen {
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .calculator {
+    width: min(85vw, 480px);
+    min-height: 80vh;
+  }
+
+  .calculator .operator,
+  .calculator .number,
+  .calculator .decimal,
+  .calculator .clear,
+  .calculator .backspace,
+  .calculator .equal-sign {
+    font-size: 1rem;
+  }
+
+  .calculator-screen {
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 901px) {
+  .calculator {
+    width: min(75vw, 520px);
+  }
 }
 
 .calculator .operator:hover,
@@ -60,7 +103,7 @@
 .calculator .backspace:hover,
 .calculator .equal-sign:hover {
   background-color: #555;
-} 
+}
 
 .calculator .operator:active,
 .calculator .number:active,
